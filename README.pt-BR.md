@@ -9,16 +9,20 @@ Projeto independente de fã por [MuriloDPV](https://github.com/MuriloDPV), inspi
 ## Instalar
 
 1. Instale o [Lively Wallpaper](https://github.com/rocksdanister/lively).
-2. Baixe `athomon-claude-wallpaper-v1.0.0-lively.zip` na seção [Releases](https://github.com/MuriloDPV/athomon-claude-wallpaper/releases).
+2. Baixe `athomon-claude-wallpaper-v1.1.0-lively.zip` na seção [Releases](https://github.com/MuriloDPV/athomon-claude-wallpaper/releases).
 3. Arraste o ZIP diretamente para o Lively, sem extrair.
 
 Também é possível baixar o [`index.html`](index.html), salvá-lo em uma pasta permanente e adicionar esse arquivo ao Lively. Não precisa compilar, instalar Node.js, ter conta ou chave de API. Para experimentar, abra o HTML no Edge ou Chrome.
+
+O ZIP escolhe automaticamente inglês ou português brasileiro. A Release também inclui `athomon-wallpaper-en.html` e `athomon-wallpaper-pt-BR.html` para quem prefere um arquivo avulso com idioma fixo.
 
 ## Cenários e animações
 
 São 11 cenários: átomo, escritório, café, leitura, servidores, estúdio, acampamento, observatório, estufa, oficina e estação. Cada ambiente tem suas próprias ações e objetos. A troca acontece a cada 150 segundos.
 
 O mini-Claude da barra alterna entre acenar, digitar, tomar café, ler e ouvir música. O cenário do átomo continua sem mascote no centro.
+
+O wallpaper tem inglês e português brasileiro, escolhidos automaticamente pelo idioma do navegador. As placas, os nomes dos ambientes e a data também são traduzidos. Você pode fixar o idioma com `idioma: "en"` ou `idioma: "pt-BR"` na configuração, ou usar `?lang=en` / `?lang=pt-BR` no endereço.
 
 ## Mini-Claude na barra
 
@@ -32,6 +36,7 @@ Abra o `index.html` em um editor de texto e procure `const CONFIG`.
 
 | Opção | Padrão | Função |
 | --- | --- | --- |
+| `idioma` | `"auto"` | Idioma: `"auto"`, `"en"` ou `"pt-BR"` |
 | `tema` | `"escuro"` | Use `"claro"` para o tema claro |
 | `cenaFixa` | `""` | Nome do cenário para interromper a rotação |
 | `trocaCenaSeg` | `150` | Segundos em cada cenário |
@@ -49,8 +54,8 @@ Nomes dos cenários: `athomon`, `escritorio`, `cafe`, `leitura`, `servidores`, `
 Para testar no navegador:
 
 ```text
-index.html?cena=leitura&fm=0
-index.html?cena=estufa&tema=claro&fm=0
+index.html?cena=leitura&lang=en
+index.html?cena=estufa&tema=claro&lang=pt-BR&fm=0
 ```
 
 O Claude FM usa o player do YouTube e precisa de internet. A reprodução depende da disponibilidade da live, da permissão para incorporação e das regras de reprodução automática do navegador. Se o som estiver bloqueado, clique uma vez no wallpaper. Com `claudeFM.ativo: false` ou `?fm=0`, o wallpaper funciona localmente sem conexões externas. A edição pública não tem monitoramento de serviços, notícias, analytics nem endereços privados.

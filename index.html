@@ -500,6 +500,7 @@
 <script>
 /* ===================== CONFIGURACAO ===================== */
 const CONFIG = {
+  idioma: "auto",          // "auto", "en" or "pt-BR"
   claudeNaBarra: {
     ativo: true,
     x: 220,                // posição horizontal em pixels, a partir da esquerda
@@ -534,6 +535,15 @@ const CONFIG = {
   if (q.get('cena')) CONFIG.cenaFixa = q.get('cena');
   if (q.has('palco')) CONFIG.mostrarPalco = true;
   if (q.has('fm')) CONFIG.claudeFM.ativo = q.get('fm') !== '0';
+  const preferredLanguage = q.get('lang') || (CONFIG.idioma === 'auto' ? navigator.language : CONFIG.idioma) || 'en';
+  const LOCALE = /^pt(?:-|$)/i.test(preferredLanguage) ? 'pt-BR' : 'en-US';
+  const ENGLISH = LOCALE === 'en-US';
+  document.documentElement.lang = LOCALE;
+  const TRANSLATIONS = {
+    'CAFÉ': 'CAFÉ', 'RÁDIO DA ESTUFA': 'GREENHOUSE RADIO', 'ESTUFA': 'GREENHOUSE',
+    'OFICINA': 'WORKSHOP', 'PLATAFORMA 02': 'PLATFORM 02', 'PRÓXIMO TREM': 'NEXT TRAIN',
+    'CHEGANDO': 'ARRIVING', 'EMBARQUE': 'BOARDING', 'PARTINDO': 'DEPARTING', 'ABERTO': 'OPEN'
+  };
   const CLARO = CONFIG.tema === 'claro';
   document.documentElement.style.setProperty('--barra', (Number(CONFIG.margemBarra) || 0) + 'px');
   document.body.classList.toggle('claro', CLARO);
@@ -565,6 +575,7 @@ const CONFIG = {
     g.addColorStop(0, `rgba(${cor},${v})`); g.addColorStop(1, `rgba(${cor},0)`);
     c.fillStyle = g; c.fillRect(x - r, y - r, r * 2, r * 2); }
   function T(txt, x, y, size, v, align = 'left', peso = 700, esp = 0){
+    if (ENGLISH) txt = TRANSLATIONS[txt] || txt;
     c.font = `${peso} ${size}px "Segoe UI","Segoe UI Variable Display",system-ui,sans-serif`;
     c.textAlign = align; c.textBaseline = 'alphabetic';
     if ('letterSpacing' in c) c.letterSpacing = esp + 'px';
@@ -690,7 +701,7 @@ const CONFIG = {
       // calendario com o dia de hoje
       const d = new Date();
       R(138, 22, 32, 40, .6); R(138, 22, 32, 11, .85);
-      T(d.toLocaleDateString('pt-BR', { month: 'short' }).replace('.', '').toUpperCase(), 154, 30.5, 8, .08, 'center', 800, .5);
+      T(d.toLocaleDateString(LOCALE, { month: 'short' }).replace('.', '').toUpperCase(), 154, 30.5, 8, .08, 'center', 800, .5);
       T(String(d.getDate()), 154, 55, 20, .1, 'center', 800);
       O(146, 22, 1.4, .35); O(162, 22, 1.4, .35);
 
@@ -1762,15 +1773,15 @@ const CONFIG = {
   /* ============ RELOGIO ============ */
   const tEl = document.getElementById('t'), dEl = document.getElementById('d');
   function clock(){ const n = new Date();
-    tEl.textContent = n.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-    dEl.textContent = n.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' }); }
+    tEl.textContent = n.toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit', hour12: false });
+    dEl.textContent = n.toLocaleDateString(LOCALE, { weekday: 'long', day: 'numeric', month: 'long' }); }
   clock(); setInterval(clock, 1000);
 
   /* ============ CLAUDE FM (YouTube) ============ */
   (() => {
     const cfg = CONFIG.claudeFM || {}, el = document.getElementById('radio'), tela = document.getElementById('tela');
     if (cfg.ativo === false) return;
-    const params = 'autoplay=1&playsinline=1&controls=0&disablekb=1&rel=0&enablejsapi=1';
+    const params = 'autoplay=1&playsinline=1&controls=0&disablekb=1&rel=0&enablejsapi=1&hl=' + (ENGLISH ? 'en' : 'pt');
     const id = String(cfg.link || '').match(/(?:v=|youtu\.be\/|\/live\/|\/embed\/)([\w-]{11})/);
     let src = '';
     if (cfg.canal) src = `https://www.youtube.com/embed/live_stream?channel=${encodeURIComponent(cfg.canal)}&${params}`;

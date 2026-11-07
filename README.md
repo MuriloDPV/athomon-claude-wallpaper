@@ -11,10 +11,12 @@ Independent fan project by [MuriloDPV](https://github.com/MuriloDPV), inspired b
 ## Install with Lively Wallpaper
 
 1. Install [Lively Wallpaper](https://github.com/rocksdanister/lively).
-2. Download `athomon-claude-wallpaper-v1.0.0-lively.zip` from Releases.
+2. Download `athomon-claude-wallpaper-v1.1.0-lively.zip` from Releases.
 3. Drag the ZIP directly into Lively. You do not need to extract it.
 
 You can also download [`index.html`](index.html), keep it in a permanent folder, and add that file to Lively. No build, Node.js, account, or API key is required. Open the HTML in Edge or Chrome to preview it.
+
+The Lively ZIP automatically uses English or Brazilian Portuguese. The release also includes `athomon-wallpaper-en.html` and `athomon-wallpaper-pt-BR.html` if you prefer a standalone file with a fixed language.
 
 ## What's inside
 
@@ -22,6 +24,7 @@ You can also download [`index.html`](index.html), keep it in a permanent folder,
 - Pixel characters with scene-specific activities and props.
 - A small taskbar companion that waves, types, sips coffee, reads, and listens to music.
 - Dark and light themes, a clock, and a date.
+- English and Brazilian Portuguese, selected automatically from the browser language.
 - Claude FM through the YouTube player, positioned inside each scene.
 
 Scenes change every 150 seconds. The atom scene has no character in its center; the taskbar companion remains available.
@@ -38,6 +41,7 @@ Edit the `CONFIG` object near the start of the main script in `index.html`:
 
 | Setting | Default | Purpose |
 | --- | --- | --- |
+| `idioma` | `"auto"` | Language: `"auto"`, `"en"`, or `"pt-BR"` |
 | `tema` | `"escuro"` | Use `"claro"` for the light theme |
 | `cenaFixa` | `""` | Set a scene name to stop rotation |
 | `trocaCenaSeg` | `150` | Seconds per scene |
@@ -55,8 +59,8 @@ Scene names: `athomon`, `escritorio`, `cafe`, `leitura`, `servidores`, `estudio`
 Browser preview examples:
 
 ```text
-index.html?cena=leitura&fm=0
-index.html?cena=estufa&tema=claro&fm=0
+index.html?cena=leitura&lang=en
+index.html?cena=estufa&tema=claro&lang=pt-BR&fm=0
 ```
 
 With Claude FM enabled, the wallpaper loads YouTube and requires internet access. YouTube playback depends on stream availability, embedding permissions, and the browser's autoplay policy. If sound is blocked, click the wallpaper once. With `claudeFM.ativo: false` or `?fm=0`, the wallpaper runs locally without external requests. The public edition has no service monitor, news feed, analytics, or private endpoints.

@@ -1,0 +1,23 @@
+{
+  "AppVersion": "1.0.0.0",
+  "Title": "Athomon — Claude Pixel Wallpaper",
+  "Thumbnail": "thumbnail.jpg",
+  "Preview": "preview.gif",
+  "Desc": "11 animated pixel scenes, a mini-Claude in the transparent taskbar and Claude FM. Independent fan project.",
+  "Author": "MuriloDPV",
+  "License": "MIT (code); see CREDITS.md for third-party elements.",
+  "Contact": "",
+  "Type": 1,
+  "FileName": "index.html",
+  "Arguments": null,
+  "IsAbsolutePath": false,
+  "Id": null,
+  "Tags": [
+    "pixel-art",
+    "claude",
+    "clawd",
+    "lively-wallpaper",
+    "animated-wallpaper"
+  ],
+  "Version": 0
+}
